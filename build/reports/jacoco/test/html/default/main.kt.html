@@ -1,28 +1,58 @@
-<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ru"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>main.kt</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">untitled1</a> &gt; <a href="index.source.html" class="el_package">default</a> &gt; <span class="el_source">main.kt</span></div><h1>main.kt</h1><pre class="source lang-java linenums">fun main() {
-<span class="nc" id="L2">    val itemPrice = 100</span>
-<span class="nc" id="L3">    val itemCount = 11</span>
-<span class="nc" id="L4">    val discount = 100</span>
-<span class="nc" id="L5">    val discountStart = 1000</span>
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ru"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>main.kt</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">untitled1</a> &gt; <a href="index.source.html" class="el_package">default</a> &gt; <span class="el_source">main.kt</span></div><h1>main.kt</h1><pre class="source lang-java linenums">import kotlin.math.max
 
-<span class="nc" id="L7">    val result = calcPrice(&quot;gold&quot;, 1)</span>
-<span class="nc" id="L8">    println(&quot;Total price: $result&quot;)</span>
-<span class="nc" id="L9">}</span>
+const val ERR_LIMIT = -1
+const val ERR_TYPE = -2
+fun main () {
+<span class="nc" id="L6">    println(&quot;TASK #1&quot;)</span>
+<span class="nc" id="L7">    println(&quot;Р‘С‹Р»(Р°) РІ СЃРµС‚Рё ${agoToText(seconds = 1000)}&quot;) // РёР·РјРµРЅРёС‚Рµ seconds РґР»СЏ СЂРµР·СѓР»СЊС‚Р°С‚Р°</span>
 
-<span class="nc" id="L11">fun calcPrice(</span>
-<span class="nc" id="L12">    userLevel: String = &quot;normal&quot;,</span>
-    itemCount: Int,
-<span class="nc" id="L14">    itemPrice: Int = 100,</span>
-<span class="nc" id="L15">    discount: Int = 100,</span>
-<span class="nc" id="L16">    discountStart: Int = 1000</span>
-): Int{
-<span class="fc" id="L18">    val total = itemPrice * itemCount</span>
-<span class="fc bfc" id="L19" title="All 2 branches covered.">    val discounted = if (total &gt; discountStart) total - discount else total</span>
-<span class="fc" id="L20">    return((1 - userLevelToDiscount(userLevel)) * discounted).toInt()</span>
+<span class="nc" id="L9">    println(&quot;TASK #2&quot;)</span>
+<span class="nc" id="L10">    val result = comission(&quot;Visa&quot;, 10000, 10000) // TYPE: MasterCard, Maestro, Visa, Mir, VKPay</span>
+<span class="nc bnc" id="L11" title="All 3 branches missed.">    when (result) {</span>
+<span class="nc" id="L12">        ERR_TYPE -&gt; println(&quot;Wrong Type&quot;)</span>
+<span class="nc" id="L13">        ERR_LIMIT -&gt; println(&quot;Limit exceed&quot;)</span>
+<span class="nc" id="L14">        else -&gt; println(&quot;РљРѕРјРёСЃСЃРёСЏ Р·Р° РїРµСЂРµРІРѕРґ: $result&quot;)</span>
+    }
+
+<span class="nc" id="L17">}</span>
+
+fun comission(type: String, amount: Int, previous: Int): Int {
+<span class="nc bnc" id="L20" title="All 4 branches missed.">    return when (type) {</span>
+<span class="nc bnc" id="L21" title="All 2 branches missed.">        &quot;MasterCard&quot;, &quot;Maestro&quot; -&gt; return if (amount + previous &gt; 150000) -1 else max(35, (amount * 0.005).toInt())</span>
+
+        &quot;Visa&quot;, &quot;Mir&quot; -&gt; {
+<span class="nc" id="L24">            when {</span>
+<span class="nc bnc" id="L25" title="All 2 branches missed.">                amount + previous &lt;= 10000 -&gt; 0</span>
+<span class="nc bnc" id="L26" title="All 2 branches missed.">                amount + previous &gt; 600000 -&gt; ERR_LIMIT</span>
+<span class="nc" id="L27">                else -&gt; max(35, (amount * 0.005).toInt())</span>
+            }
+        }
+
+        &quot;VKPay&quot; -&gt; {
+<span class="nc" id="L32">            when {</span>
+<span class="nc bnc" id="L33" title="All 2 branches missed.">                amount &gt; 15000 -&gt; ERR_LIMIT</span>
+<span class="nc bnc" id="L34" title="All 2 branches missed.">                amount + previous &gt;= 40000 -&gt; ERR_LIMIT</span>
+<span class="nc" id="L35">                else -&gt; 0</span>
+            }
+        }
+
+
+        else -&gt; {
+<span class="nc" id="L41">            ERR_TYPE</span>
+        }
+    }
 }
-
-<span class="pc" id="L23">fun userLevelToDiscount(level: String = &quot;normal&quot;) = when(level) {</span>
-<span class="pc bpc" id="L24" title="1 of 2 branches missed.">    &quot;gold&quot; -&gt; 0.1</span>
-<span class="nc bnc" id="L25" title="All 2 branches missed.">    &quot;silver&quot; -&gt; 0.05</span>
-<span class="nc" id="L26">    else -&gt; 0.0</span>
-<span class="fc" id="L27">}</span>
+fun agoToText(seconds: Int): String {
+<span class="nc bnc" id="L46" title="All 6 branches missed.">    val minutes = if (seconds/60 % 1 == 1 &amp;&amp; seconds/60 &lt;= 241 ) &quot;РјРёРЅСѓС‚&quot; else if (seconds/60 % 2 == 0) &quot;РјРёРЅСѓС‚&quot; else &quot;РјРёРЅСѓС‚С‹&quot;</span>
+<span class="nc bnc" id="L47" title="All 6 branches missed.">    val hours = if (seconds/3600 % 1 == 1 &amp;&amp; seconds/3600 &lt;= 3601) &quot;С‡Р°СЃ&quot; else if (seconds/3600 % 2 == 0) &quot;С‡Р°СЃР°&quot; else &quot;С‡Р°СЃРѕРІ&quot;</span>
+<span class="nc" id="L48">    return when (seconds) {</span>
+<span class="nc bnc" id="L49" title="All 6 branches missed.">        in 0..60 -&gt; &quot;РўРѕР»СЊРєРѕ С‡С‚Рѕ&quot;</span>
+<span class="nc bnc" id="L50" title="All 6 branches missed.">        in 61..3600 -&gt; &quot;${seconds/60} $minutes РЅР°Р·Р°Рґ&quot;</span>
+<span class="nc bnc" id="L51" title="All 6 branches missed.">        in 3601..24 * 60 * 60 -&gt; &quot;${seconds/3600} $hours РЅР°Р·Р°Рґ&quot;</span>
+<span class="nc bnc" id="L52" title="All 6 branches missed.">        in 3600 * 24..3600 * 48 -&gt; &quot;РІС‡РµСЂР°&quot;</span>
+<span class="nc bnc" id="L53" title="All 6 branches missed.">        in 3600 * 48..3600 * 72 -&gt; &quot;РїРѕР·Р°РІС‡РµСЂР°&quot;</span>
+<span class="nc bnc" id="L54" title="All 6 branches missed.">        in 3600 * 72..3600 * 72 * 30 -&gt; &quot;РґР°РІРЅРѕ&quot;</span>
+<span class="nc" id="L55">        else -&gt; &quot;РґР°РІРЅРѕ&quot;</span>
+    }
+}
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

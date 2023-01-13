@@ -5,28 +5,26 @@ import org.junit.Assert.*
 class MainKtTest {
 
     @Test
-    fun calcPriceShouldNotAddDiscount() {
-        val itemPrice = 100
-        val itemCount = 1
-        val discount = 10
-        val discountStart = 1000
-        val level = "gold"
-
-        val result = calcPrice(level, itemCount, itemPrice, discount, discountStart)
-
-        assertEquals(90, result)
+    fun testJustNow() {
+        val result = agoToText(30)
+        assertEquals("Только что", result)
     }
 
     @Test
-    fun calcPriceShouldAddDiscount() {
-        val itemPrice = 1000
-        val itemCount = 1
-        val discount = 10
-        val discountStart = 100
-        val level = "gold"
+    fun testMinutesAgo() {
+        val result = agoToText(90)
+        assertEquals("1 минуты назад", result)
+    }
 
-        val result = calcPrice(level, itemCount, itemPrice, discount, discountStart)
+    @Test
+    fun testHoursAgo() {
+        val result = agoToText(7200)
+        assertEquals("2 часа назад", result)
+    }
 
-        assertEquals(891, result)
+    @Test
+    fun testYesterday() {
+        val result = agoToText(3600 * 25)
+        assertEquals("вчера", result)
     }
 }
