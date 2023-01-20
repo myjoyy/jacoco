@@ -1,8 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="MainKtTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2023-01-13T08:34:01" hostname="MYJOY" time="0.006">
+<testsuite name="MainKtTest" tests="13" skipped="0" failures="0" errors="0" timestamp="2023-01-20T20:39:07" hostname="MYJOY" time="0.009">
   <properties/>
-  <testcase name="calcPriceShouldNotAddDiscount" classname="MainKtTest" time="0.006"/>
-  <testcase name="calcPriceShouldAddDiscount" classname="MainKtTest" time="0.0"/>
+  <testcase name="comissionMir" classname="MainKtTest" time="0.006"/>
+  <testcase name="comissionVisaZero" classname="MainKtTest" time="0.0"/>
+  <testcase name="comissionMasterCard" classname="MainKtTest" time="0.001"/>
+  <testcase name="testJustNow" classname="MainKtTest" time="0.0"/>
+  <testcase name="comissionErrType" classname="MainKtTest" time="0.0"/>
+  <testcase name="comissionVKPay" classname="MainKtTest" time="0.0"/>
+  <testcase name="testYesterday" classname="MainKtTest" time="0.0"/>
+  <testcase name="comissionVisa" classname="MainKtTest" time="0.0"/>
+  <testcase name="testHoursAgo" classname="MainKtTest" time="0.0"/>
+  <testcase name="comissionMirErr" classname="MainKtTest" time="0.001"/>
+  <testcase name="comissionVKPayErr" classname="MainKtTest" time="0.0"/>
+  <testcase name="comissionMaestro" classname="MainKtTest" time="0.0"/>
+  <testcase name="testMinutesAgo" classname="MainKtTest" time="0.0"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

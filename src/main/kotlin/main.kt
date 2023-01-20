@@ -7,7 +7,7 @@ fun main () {
     println("Был(а) в сети ${agoToText(seconds = 1000)}") // измените seconds для результата
 
     println("TASK #2")
-    val result = comission("Visa", 10000, 10000) // TYPE: MasterCard, Maestro, Visa, Mir, VKPay
+    val result = comission("MasterCard", 10000, 10000) // TYPE: MasterCard, Maestro, Visa, Mir, VKPay
     when (result) {
         ERR_TYPE -> println("Wrong Type")
         ERR_LIMIT -> println("Limit exceed")

@@ -7,7 +7,7 @@ fun main () {
 <span class="nc" id="L7">    println(&quot;Р‘С‹Р»(Р°) РІ СЃРµС‚Рё ${agoToText(seconds = 1000)}&quot;) // РёР·РјРµРЅРёС‚Рµ seconds РґР»СЏ СЂРµР·СѓР»СЊС‚Р°С‚Р°</span>
 
 <span class="nc" id="L9">    println(&quot;TASK #2&quot;)</span>
-<span class="nc" id="L10">    val result = comission(&quot;Visa&quot;, 10000, 10000) // TYPE: MasterCard, Maestro, Visa, Mir, VKPay</span>
+<span class="nc" id="L10">    val result = comission(&quot;MasterCard&quot;, 10000, 10000) // TYPE: MasterCard, Maestro, Visa, Mir, VKPay</span>
 <span class="nc bnc" id="L11" title="All 3 branches missed.">    when (result) {</span>
 <span class="nc" id="L12">        ERR_TYPE -&gt; println(&quot;Wrong Type&quot;)</span>
 <span class="nc" id="L13">        ERR_LIMIT -&gt; println(&quot;Limit exceed&quot;)</span>
@@ -17,39 +17,39 @@ fun main () {
 <span class="nc" id="L17">}</span>
 
 fun comission(type: String, amount: Int, previous: Int): Int {
-<span class="nc bnc" id="L20" title="All 4 branches missed.">    return when (type) {</span>
-<span class="nc bnc" id="L21" title="All 2 branches missed.">        &quot;MasterCard&quot;, &quot;Maestro&quot; -&gt; return if (amount + previous &gt; 150000) -1 else max(35, (amount * 0.005).toInt())</span>
+<span class="fc bfc" id="L20" title="All 4 branches covered.">    return when (type) {</span>
+<span class="pc bpc" id="L21" title="1 of 2 branches missed.">        &quot;MasterCard&quot;, &quot;Maestro&quot; -&gt; return if (amount + previous &gt; 150000) -1 else max(35, (amount * 0.005).toInt())</span>
 
         &quot;Visa&quot;, &quot;Mir&quot; -&gt; {
-<span class="nc" id="L24">            when {</span>
-<span class="nc bnc" id="L25" title="All 2 branches missed.">                amount + previous &lt;= 10000 -&gt; 0</span>
-<span class="nc bnc" id="L26" title="All 2 branches missed.">                amount + previous &gt; 600000 -&gt; ERR_LIMIT</span>
-<span class="nc" id="L27">                else -&gt; max(35, (amount * 0.005).toInt())</span>
+<span class="fc" id="L24">            when {</span>
+<span class="fc bfc" id="L25" title="All 2 branches covered.">                amount + previous &lt;= 10000 -&gt; 0</span>
+<span class="fc bfc" id="L26" title="All 2 branches covered.">                amount + previous &gt; 600000 -&gt; ERR_LIMIT</span>
+<span class="fc" id="L27">                else -&gt; max(35, (amount * 0.005).toInt())</span>
             }
         }
 
         &quot;VKPay&quot; -&gt; {
-<span class="nc" id="L32">            when {</span>
-<span class="nc bnc" id="L33" title="All 2 branches missed.">                amount &gt; 15000 -&gt; ERR_LIMIT</span>
-<span class="nc bnc" id="L34" title="All 2 branches missed.">                amount + previous &gt;= 40000 -&gt; ERR_LIMIT</span>
-<span class="nc" id="L35">                else -&gt; 0</span>
+<span class="fc" id="L32">            when {</span>
+<span class="fc bfc" id="L33" title="All 2 branches covered.">                amount &gt; 15000 -&gt; ERR_LIMIT</span>
+<span class="pc bpc" id="L34" title="1 of 2 branches missed.">                amount + previous &gt;= 40000 -&gt; ERR_LIMIT</span>
+<span class="fc" id="L35">                else -&gt; 0</span>
             }
         }
 
 
         else -&gt; {
-<span class="nc" id="L41">            ERR_TYPE</span>
+<span class="fc" id="L41">            ERR_TYPE</span>
         }
     }
 }
 fun agoToText(seconds: Int): String {
-<span class="nc bnc" id="L46" title="All 6 branches missed.">    val minutes = if (seconds/60 % 1 == 1 &amp;&amp; seconds/60 &lt;= 241 ) &quot;РјРёРЅСѓС‚&quot; else if (seconds/60 % 2 == 0) &quot;РјРёРЅСѓС‚&quot; else &quot;РјРёРЅСѓС‚С‹&quot;</span>
-<span class="nc bnc" id="L47" title="All 6 branches missed.">    val hours = if (seconds/3600 % 1 == 1 &amp;&amp; seconds/3600 &lt;= 3601) &quot;С‡Р°СЃ&quot; else if (seconds/3600 % 2 == 0) &quot;С‡Р°СЃР°&quot; else &quot;С‡Р°СЃРѕРІ&quot;</span>
-<span class="nc" id="L48">    return when (seconds) {</span>
-<span class="nc bnc" id="L49" title="All 6 branches missed.">        in 0..60 -&gt; &quot;РўРѕР»СЊРєРѕ С‡С‚Рѕ&quot;</span>
-<span class="nc bnc" id="L50" title="All 6 branches missed.">        in 61..3600 -&gt; &quot;${seconds/60} $minutes РЅР°Р·Р°Рґ&quot;</span>
-<span class="nc bnc" id="L51" title="All 6 branches missed.">        in 3601..24 * 60 * 60 -&gt; &quot;${seconds/3600} $hours РЅР°Р·Р°Рґ&quot;</span>
-<span class="nc bnc" id="L52" title="All 6 branches missed.">        in 3600 * 24..3600 * 48 -&gt; &quot;РІС‡РµСЂР°&quot;</span>
+<span class="pc bpc" id="L46" title="3 of 6 branches missed.">    val minutes = if (seconds/60 % 1 == 1 &amp;&amp; seconds/60 &lt;= 241 ) &quot;РјРёРЅСѓС‚&quot; else if (seconds/60 % 2 == 0) &quot;РјРёРЅСѓС‚&quot; else &quot;РјРёРЅСѓС‚С‹&quot;</span>
+<span class="pc bpc" id="L47" title="3 of 6 branches missed.">    val hours = if (seconds/3600 % 1 == 1 &amp;&amp; seconds/3600 &lt;= 3601) &quot;С‡Р°СЃ&quot; else if (seconds/3600 % 2 == 0) &quot;С‡Р°СЃР°&quot; else &quot;С‡Р°СЃРѕРІ&quot;</span>
+<span class="fc" id="L48">    return when (seconds) {</span>
+<span class="pc bpc" id="L49" title="1 of 6 branches missed.">        in 0..60 -&gt; &quot;РўРѕР»СЊРєРѕ С‡С‚Рѕ&quot;</span>
+<span class="pc bpc" id="L50" title="1 of 6 branches missed.">        in 61..3600 -&gt; &quot;${seconds/60} $minutes РЅР°Р·Р°Рґ&quot;</span>
+<span class="pc bpc" id="L51" title="1 of 6 branches missed.">        in 3601..24 * 60 * 60 -&gt; &quot;${seconds/3600} $hours РЅР°Р·Р°Рґ&quot;</span>
+<span class="pc bpc" id="L52" title="3 of 6 branches missed.">        in 3600 * 24..3600 * 48 -&gt; &quot;РІС‡РµСЂР°&quot;</span>
 <span class="nc bnc" id="L53" title="All 6 branches missed.">        in 3600 * 48..3600 * 72 -&gt; &quot;РїРѕР·Р°РІС‡РµСЂР°&quot;</span>
 <span class="nc bnc" id="L54" title="All 6 branches missed.">        in 3600 * 72..3600 * 72 * 30 -&gt; &quot;РґР°РІРЅРѕ&quot;</span>
 <span class="nc" id="L55">        else -&gt; &quot;РґР°РІРЅРѕ&quot;</span>
